@@ -1,0 +1,30 @@
+_schema-version: 3.3.0
+ID: byoexample
+version: 1.0.0
+description: "Byo Example Service"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm run install:ci
+        - npm run build
+modules:
+  - name: paiper-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-type: http
+      readiness-health-check-http-endpoint: /health
+      disk-quota: 512MB
+      memory: 512MB
+      instances: 1
+      random-route: true
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}

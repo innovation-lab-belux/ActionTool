@@ -1,0 +1,45 @@
+# CAP chain_configuration
+_out
+*.db
+*.sqlite
+connection.properties
+default-*.json
+gen/
+node_modules/
+target/
+.cache
+
+# Web IDE, App Studio
+.che/
+.gen/
+
+# MTA
+*_mta_build_tmp
+*.mtar
+*.mta
+default-env.json
+mta_archives/
+
+# Other
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+tmp
+
+# IDEs
+.vscode/
+.env
+.idea/
+
+# Tests
+reports/
+
+*.sqlite-*
+
+@cds-models
+storage
+coverage
+srv/.transformers

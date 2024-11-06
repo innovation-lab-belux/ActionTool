@@ -1,0 +1,58 @@
+{
+  "name": "byo",
+  "version": "1.0.0",
+  "description": "BYO Example",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^8.3.1",
+    "cds-swagger-ui-express": "^0.10.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.3"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.6.5",
+    "@cap-js/sqlite": "^1.7.4",
+    "@sap/cds-dk": "^8.3.0",
+    "@types/node": "^22.7.6",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "dev": "cds-ts serve",
+    "build": "rimraf gen && cds build --production && rimraf --glob gen/srv/srv/**/*.ts && tsc -p tsconfig.json",
+    "build:mta": "mbt build -t gen --mtar mta.tar -m=verbose -j=2",
+    "deploy": "cf deploy gen/mta.tar -f",
+    "test": "node ./node_modules/jest/bin/jest.js -c jest.config.js --no-cache --coverage --runInBand --forceExit --verbose --logHeapUsage",
+    "install:ci": "(node -e \"process.exit(require('fs').existsSync('node_modules') ? 0 : 1)\") || npm ci",
+    "buildAndDeploy": "npm run build:mta && npm run deploy"
+  },
+  "engines": {
+    "node": "^20"
+  },
+  "cds": {
+    "server": {
+      "index": true,
+      "body_parser": {
+        "limit": "5mb"
+      }
+    },
+    "requires": {
+      "features": {
+        "odata_new_parser": true
+      },
+      "[development]": {
+        "auth": "mocked"
+      },
+      "[production]": {
+        "auth": "mocked"
+      }
+    },
+    "features": {
+      "kibana_formatter": true
+    }
+  }
+}

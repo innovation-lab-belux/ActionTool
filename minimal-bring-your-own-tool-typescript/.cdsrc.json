@@ -1,0 +1,14 @@
+{
+  "import": {
+    "as": "cds",
+    "force": true
+  },
+  "odata": {
+    "flavor": "v4",
+    "containment": true,
+    "structs": true,
+    "refs": true,
+    "proxies": true,
+    "safe_ax": true
+  }
+}
