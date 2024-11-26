@@ -1,0 +1,72 @@
+<mvc:View
+    height="100%"
+    controllerName="ui5.walkthrough.controller.Chat"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        showHeader="false"
+        enableScrolling="true"
+        class="sapUiContentPadding"
+        showNavButton="true"
+    >
+        <content>
+            <VBox
+                id="chatContainer"
+                class="sapUiSmallMargin sapUiResponsiveContentPadding"
+            >
+                <List
+                    id="messageList"
+                    items="{selectionModel>/selectedChat/history}"
+                >
+                    <items>
+                        <CustomListItem class="chatList">
+                            <VBox alignItems="End" visible="{= ${selectionModel>sender} === 'user' }">
+                                <Text
+                                    text="{selectionModel>content}"
+                                    class="userMessage"
+                                    wrapping="true"/>
+                            </VBox>
+                            <VBox alignItems="Start" visible="{= ${selectionModel>sender} !== 'user' }">
+                                <Text
+                                    text="{selectionModel>content}"
+                                    class="botMessage"
+                                    wrapping="true"/>
+                            </VBox>
+                        </CustomListItem>
+                    </items>
+                </List>
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar id="otbFooter">
+                <FlexBox
+                    width="100%"
+                    alignItems="Center"
+                    justifyContent="SpaceBetween"
+                >
+                    <TextArea
+                        id="messageInput"
+                        placeholder="Type a message"
+                        ariaLabelledBy="Send message input"
+                        width="100%"
+                        rows="2"
+                    >
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </TextArea>
+                    <Button
+                        text="Send"
+                        press="onSendMessage"
+                    >
+                        <layoutData>
+                            <FlexItemData growFactor="0" />
+                        </layoutData>
+                    </Button>
+                </FlexBox>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

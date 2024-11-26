@@ -1,0 +1,15 @@
+{
+  "name": "approuter",
+  "version": "1.0.0",
+  "main": "none",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm list && node node_modules/@sap/approuter/approuter.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@sap/approuter": "^17.1.0"
+  }
+}

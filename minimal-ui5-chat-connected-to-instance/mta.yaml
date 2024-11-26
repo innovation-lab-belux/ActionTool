@@ -1,0 +1,54 @@
+_schema-version: 3.3.0
+ID: ui5-chat-test
+version: 1.0.0
+description: "Example of chat for consumption of ui-agent API"
+parameters:
+  enable-parallel-deployments: true
+  planSuffix: dev
+  appname: baf-ui5-chat
+  subdomain: baf-ui5-chat-${planSuffix}
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm clean-install
+        - npm run build
+modules:
+  - name: baf-ui5-chat
+    type: nodejs
+    path: approuter/
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 256MB
+      memory: 256MB
+    build-parameters:
+      builder: npm
+    requires:
+      - name: my-xsuaa
+      - name: my-destination-service
+    properties:
+      destinations: >
+        [ 
+          {"name": "ui5","url": "https://ui5.sap.com/1.129.2/resources","forwardAuthToken": false}
+        ]
+      SESSION_TIMEOUT: 30
+      UAA_SERVICE_NAME: "baf-xsuaa-user-provided"
+
+resources:
+  - name: my-xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      service-name: chat-xsuaa
+      config:
+        xsappname: chat-xsuaa
+        tenant-mode: dedicated
+  - name: my-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      service-name: chat-destination-service
+
+      

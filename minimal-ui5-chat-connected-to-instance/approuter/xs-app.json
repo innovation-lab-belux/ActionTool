@@ -1,0 +1,26 @@
+{
+  "welcomeFile": "/ui/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/ui/resources/sap(.*)$",
+      "target": "/sap$1",
+      "destination": "ui5",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/ui/(.*)$",
+      "target": "/$1",
+      "localDir": "resources",
+      "cacheControl": "private,no-store,no-cache,must-revalidate",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/odata/unified-ai-service/(.*)$",
+      "target": "/$1",
+      "destination": "AgentBuilder",
+      "csrfProtection": false,
+      "authenticationType": "none"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+	"_version": "1.58.0",
+	"sap.app": {
+		"id": "ui5.walkthrough",
+		"title": "This Is A Chat App",
+		"description": "This is a chat app",
+		"type": "application",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"unifiedAiAgentService": {
+				"uri": "/odata/unified-ai-service/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.108.0",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {}
+			}
+		},
+		"models": {
+			"": {
+				"dataSource": "unifiedAiAgentService",
+				"settings": {
+					"operationMode": "Server",
+					"groupId": "$auto"
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "ui5.walkthrough.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ui5.walkthrough.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"notFound"
+					]
+				}
+			},
+			"routes": [
+				{
+					"pattern": "chat/{agentId}/{chatId}",
+					"name": "chat",
+					"target": [
+						"chat"
+					]
+				}
+			],
+			"targets": {
+				"chat": {
+					"viewName": "Chat",
+					"viewLevel": 1
+				},
+				"notFound": {
+					"viewName": "NotFound"
+				}
+			}
+		}
+	}
+}

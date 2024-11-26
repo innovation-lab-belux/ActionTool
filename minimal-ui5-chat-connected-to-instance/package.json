@@ -1,0 +1,27 @@
+{
+  "name": "ui5-chat-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ui5 serve -o index.html",
+    "start:router": "node ./approuter/node_modules/@sap/approuter/approuter.js",
+    "pack": "mbt build -t gen --mtar mta.tar",
+    "deploy": "cf bg-deploy gen/mta.tar --no-confirm",
+    "build": "ui5 build --clean-dest --dest ./approuter/resources",
+    "build:watch": "nodemon --watch webapp --ext ts,xml,json,css --exec \"npm run build\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/openui5": "^1.130.0",
+    "@ui5/cli": "^4.0.10",
+    "typescript": "^5.6.3",
+    "ui5-middleware-livereload": "^3.1.0",
+    "ui5-middleware-serveframework": "^3.3.0",
+    "ui5-middleware-simpleproxy": "^3.3.1",
+    "ui5-tooling-transpile": "^3.5.1",
+    "@sap/approuter": "^17.1.0"
+  }
+}
