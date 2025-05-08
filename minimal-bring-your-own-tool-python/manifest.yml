@@ -1,6 +1,6 @@
 ---
 applications:
-- name: bringyourown
+- name: AgentActionsTool
   random-route: true
   path: ./
   memory: 128M
