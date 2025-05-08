@@ -128,6 +128,12 @@ async def on_tool_called(req: CallbackRequest):
         print(f"Updating order {order_id} city to {city}")
         return {"response": "200 success, transaction was successfully run"}
 
+    elif action == "update_order_city":
+        order_id = params.get("OrderID")
+        city = params.get("City")
+        print(f"Updating order {order_id} city to {city}")
+        return {"response": "200 success, transaction was successfully run"}
+    
     else:
         return {"response": "Unknown action"}
 
